@@ -65,6 +65,7 @@ public enum ErrorCode implements BaseErrorCode {
     TRANSACTION_CHECK(500, "Hệ thống đang trong quá trình xử lý revert hoặc tích hơp. Không thể revert hoặc tích hợp !", HttpStatus.BAD_REQUEST),
     BLOCK_FUNCTION(500, "Chức năng đang được bảo trì, vui lòng thử lại sau!", HttpStatus.BAD_REQUEST),
     ERROR_FILE_SIZE(400, "File phải nhỏ hơn 20Mb!", HttpStatus.BAD_REQUEST),
+    USER_CANNOT_ACCESS(403, "User khong dung", HttpStatus.UNAUTHORIZED),
     ERROR_FILE_TYPE(400, "File sai định dạng!", HttpStatus.BAD_REQUEST);
 
 

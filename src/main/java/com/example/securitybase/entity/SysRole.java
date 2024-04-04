@@ -20,9 +20,8 @@ public class SysRole extends BaseEntity implements EntityWithActiveField {
 
 
     @Id
-   	@GeneratedValue(generator = "SYS_ROLE_SEQ", strategy = GenerationType.SEQUENCE)
-   	@SequenceGenerator(name = "SYS_ROLE_SEQ", sequenceName = "SYS_ROLE_SEQ",allocationSize=1)
-   	@Column(name = "ID", unique = true, nullable = false)
+   	@Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -42,7 +41,7 @@ public class SysRole extends BaseEntity implements EntityWithActiveField {
     }
 
     @Basic
-    @Column(name = "KEY")
+    @Column(name = "KEY_ROLE")
     public String getKey() {
         return key;
     }

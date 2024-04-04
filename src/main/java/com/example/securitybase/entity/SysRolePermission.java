@@ -10,9 +10,8 @@ public class SysRolePermission {
     private Long permissionId;
 
     @Id
-    @GeneratedValue(generator = "SYS_ROLE_PERMISSION_SEQ", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "SYS_ROLE_PERMISSION_SEQ", sequenceName = "SYS_ROLE_PERMISSION_SEQ",allocationSize=1)
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }

@@ -1,7 +1,6 @@
 package com.example.securitybase.repository.systems;
 
 import com.example.securitybase.entity.SysRoleFunction;
-import com.mbbank.cmv.repository.bases.BaseActiveFieldRepository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

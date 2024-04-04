@@ -4,13 +4,15 @@ import com.example.securitybase.auth.beans.JWTTokenProvider;
 import com.example.securitybase.auth.enums.TokenType;
 import com.example.securitybase.auth.models.UserPrincipal;
 import com.example.securitybase.comon.ErrorCode;
+import com.example.securitybase.comon.enums.StatusType;
+import com.example.securitybase.entity.SysPermission;
+import com.example.securitybase.entity.SysRole;
 import com.example.securitybase.entity.SysUser;
 import com.example.securitybase.exception.CustomServiceBusinessException;
+import com.example.securitybase.model.administrator.UserRoleFunctionModel;
 import com.example.securitybase.repository.systems.*;
 import com.example.securitybase.repository.systems.SysRoleRepository;
-import com.mbbank.cmv.common.enums.StatusType;
-import com.mbbank.cmv.model.administrator.UserRoleFunctionModel;
-import com.mbbank.cmv.response.LoginResponse;
+import com.example.securitybase.response.LoginResponse;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -119,8 +121,8 @@ public class CustomAuthenticationProviderRemote implements AuthenticationProvide
                 }
             }
         }
-        List authorizes = getRolesByUser(userId);
-        List scope = getScopesByUserId(userId);
+        List<String> authorizes = getRolesByUser(userId);
+        List<String> scope = getScopesByUserId(userId);
 //userT24 = sysUserRepository.findById(userId).get().getUsername();
         rmCode = "test"; //userRepository.getById(userId).getRmCode();
         LoginResponse loginResponse = new LoginResponse();
@@ -157,10 +159,10 @@ public class CustomAuthenticationProviderRemote implements AuthenticationProvide
         return null;
     }
 
-    private List getScopesByUserId(Long userId) {
-        List scopes = new ArrayList();
+    private List<String> getScopesByUserId(Long userId) {
+        List<String> scopes = new ArrayList();
 
-        List permissions = sysPermissionRepository.findByUserId(userId);
+        List<SysPermission> permissions = sysPermissionRepository.findByUserId(userId);
         if (permissions.isEmpty())
             return scopes;
 
@@ -169,8 +171,8 @@ public class CustomAuthenticationProviderRemote implements AuthenticationProvide
         return scopes;
     }
 
-    private List getRolesByUser(Long userId) throws CustomServiceBusinessException {
-        List latestRoles = new ArrayList();
+    private List<String> getRolesByUser(Long userId) throws CustomServiceBusinessException {
+        List<String> latestRoles = new ArrayList();
 
         var sysGroups = sysGroupFullRepository.findByUserId(userId);
         if (sysGroups.isEmpty()) {
@@ -180,7 +182,7 @@ public class CustomAuthenticationProviderRemote implements AuthenticationProvide
         var rolesIgnores = Arrays.stream(ignoreRoles.split(",")).collect(Collectors.toList());
 
         for (var sysGroup : sysGroups) {
-            List sysRoles = sysRoleRepository.findByGroupIdAndUserId(sysGroup.getId(), userId);
+            List<SysRole> sysRoles = sysRoleRepository.findByGroupIdAndUserId(sysGroup.getId(), userId);
 
             for (SysRole sysRole : sysRoles) {
                 if (!rolesIgnores.isEmpty()) {
@@ -195,7 +197,7 @@ public class CustomAuthenticationProviderRemote implements AuthenticationProvide
         return latestRoles;
     }
 
-    private List getRoleFunctionByUser(List authorizes) {
+    private List getRoleFunctionByUser(List<String> authorizes) {
         List userRoleFunctionModelList = new ArrayList();
         for (String authorize : authorizes) {
             UserRoleFunctionModel model = new UserRoleFunctionModel();

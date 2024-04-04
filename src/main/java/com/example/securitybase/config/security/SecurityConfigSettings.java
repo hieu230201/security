@@ -47,9 +47,7 @@ public class SecurityConfigSettings {
                 "/**/services/integratedCRA/getThongTinTaiSan",
                 "/**/services/integratedCRA/getTsByInfo",
                 "/**/actuator/**",
-
                 "/**/CmvCsImportInfo/**",
-
                 "/**/staticfiles/accessfiles/**",
                 "/**/common/captcha/**"
 

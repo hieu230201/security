@@ -1,9 +1,8 @@
 package com.example.securitybase.repository.systems.impl;
 
+import com.example.securitybase.entity.SysRole;
+import com.example.securitybase.repository.systems.SysRoleRepositoryCustom;
 import com.example.securitybase.util.SqlQueryUtil;
-import com.mbbank.cmv.common.anotations.UseLogging;
-import com.mbbank.cmv.common.anotations.UseSafeRunning;
-import com.mbbank.cmv.repository.systems.SysRoleRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
@@ -20,16 +19,16 @@ public class SysRoleRepositoryImpl implements SysRoleRepositoryCustom {
     @Autowired
     SqlQueryUtil sqlQueryUtil;
 
-    @UseSafeRunning
-    @UseLogging
+//    @UseSafeRunning
+//    @UseLogging
     @SuppressWarnings("unchecked")
     @Override
     public List<SysRole> findByGroupId(Long groupId) {
         return findByGroupIds(groupId);
     }
 
-    @UseSafeRunning
-    @UseLogging
+//    @UseSafeRunning
+//    @UseLogging
     @Override
     public List<SysRole> findByGroupIdAndUserId(Long groupId, Long userId) {
         var sql = "SELECT A FROM SysRole A\n" +
@@ -113,8 +112,8 @@ public class SysRoleRepositoryImpl implements SysRoleRepositoryCustom {
         return sqlQueryUtil.queryEntity().querySql(sql, params, SysRole.class);
     }
 
-    @UseSafeRunning
-    @UseLogging
+//    @UseSafeRunning
+//    @UseLogging
     @Override
     public List<SysRole> findByGroupIds(Long... groupIds) {
         var sql = "SELECT C FROM SysGroupFull A\n" +

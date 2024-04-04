@@ -27,9 +27,8 @@ public class SysUser extends BaseEntity {
     private Boolean isAccountApp;
 
     @Id
-    @GeneratedValue(generator = "SYS_USER_SEQ", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "SYS_USER_SEQ", sequenceName = "SYS_USER_SEQ",allocationSize=1)
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -39,7 +38,7 @@ public class SysUser extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "USERNAME", length = 100)
+    @Column(name = "USER_NAME")
     public String getUsername() {
         return username;
     }
@@ -49,7 +48,7 @@ public class SysUser extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "FULLNAME", length = 100)
+    @Column(name = "FULL_NAME")
     public String getFullname() {
         return fullname;
     }
@@ -59,7 +58,7 @@ public class SysUser extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "EMAIL", length = 100)
+    @Column(name = "EMAIL")
     public String getEmail() {
         return email;
     }
@@ -69,7 +68,7 @@ public class SysUser extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "PHONE", length = 12)
+    @Column(name = "PHONE")
     public String getPhone() {
         return phone;
     }
@@ -79,7 +78,7 @@ public class SysUser extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "DEPARTMENT", length = 1000)
+    @Column(name = "DEPARTMENT")
     public String getDepartment() {
         return department;
     }
@@ -89,7 +88,7 @@ public class SysUser extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "STATUS", length = 50)
+    @Column(name = "STATUS")
     public String getStatus() {
         return status;
     }

@@ -11,9 +11,8 @@ public class SysRoleFunction {
     private String functionName;
 
     @Id
-    @GeneratedValue(generator = "SYS_ROLE_FUNCTION_SEQ", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "SYS_ROLE_FUNCTION_SEQ", sequenceName = "SYS_ROLE_FUNCTION_SEQ",allocationSize=1)
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }

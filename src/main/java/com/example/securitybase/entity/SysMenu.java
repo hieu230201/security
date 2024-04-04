@@ -24,6 +24,7 @@ public class SysMenu extends BaseEntity {
 
     @Id
    	@Column(name = "ID", unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public long getId() {
         return id;
     }
@@ -33,7 +34,7 @@ public class SysMenu extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "NAME", length = 500)
+    @Column(name = "NAME")
     public String getName() {
         return name;
     }
@@ -43,7 +44,7 @@ public class SysMenu extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "PATH", length = 500)
+    @Column(name = "PATH")
     public String getPath() {
         return path;
     }
@@ -53,7 +54,7 @@ public class SysMenu extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "ICON", length = 200)
+    @Column(name = "ICON")
     public String getIcon() {
         return icon;
     }
@@ -103,7 +104,7 @@ public class SysMenu extends BaseEntity {
     }
 
     @Basic
-    @Column(name = "DESCRIPTION", length = 1000)
+    @Column(name = "DESCRIPTION")
     public String getDescription() {
         return description;
     }

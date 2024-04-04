@@ -19,9 +19,8 @@ public class SysPermission extends BaseEntity implements EntityWithActiveField {
 
 
     @Id
-   	@GeneratedValue(generator = "SYS_PERMISSION_SEQ", strategy = GenerationType.SEQUENCE)
-   	@SequenceGenerator(name = "SYS_PERMISSION_SEQ", sequenceName = "SYS_PERMISSION_SEQ",allocationSize=1)
-   	@Column(name = "ID", unique = true, nullable = false)
+   	@Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -31,7 +30,7 @@ public class SysPermission extends BaseEntity implements EntityWithActiveField {
     }
 
     @Basic
-    @Column(name = "PERMISSION_KEY", length = 500)
+    @Column(name = "PERMISSION_KEY")
     public String getPermissionKey() {
         return permissionKey;
     }
@@ -41,7 +40,7 @@ public class SysPermission extends BaseEntity implements EntityWithActiveField {
     }
 
     @Basic
-    @Column(name = "PERMISSION_NAME", length = 500)
+    @Column(name = "PERMISSION_NAME")
     public String getPermissionName() {
         return permissionName;
     }

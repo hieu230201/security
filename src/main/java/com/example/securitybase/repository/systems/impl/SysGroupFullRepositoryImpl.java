@@ -1,12 +1,8 @@
 package com.example.securitybase.repository.systems.impl;
 
+import com.example.securitybase.entity.SysGroupFull;
+import com.example.securitybase.repository.systems.SysGroupFullRepositoryCustom;
 import com.example.securitybase.util.SqlQueryUtil;
-import com.mbbank.cmv.common.anotations.UseLogging;
-import com.mbbank.cmv.common.anotations.UseSafeRunning;
-import com.mbbank.cmv.entity.SysGroupFull;
-import com.mbbank.cmv.model.BranchModelDto;
-import com.mbbank.cmv.model.SysUserModel;
-import com.mbbank.cmv.repository.systems.SysGroupFullRepositoryCustom;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.EntityManager;
@@ -26,8 +22,8 @@ public class SysGroupFullRepositoryImpl implements SysGroupFullRepositoryCustom 
     SqlQueryUtil sqlQueryUtil;
 
 
-    @UseSafeRunning
-    @UseLogging
+//    @UseSafeRunning
+//    @UseLogging
     @Override
     public List<SysGroupFull> getAllLeafNode(){
         String sql = "SELECT A FROM SysGroupFull A\n" +
@@ -227,28 +223,28 @@ public class SysGroupFullRepositoryImpl implements SysGroupFullRepositoryCustom 
         return sqlQueryUtil.queryEntity().querySql(sql, params, SysGroupFull.class);
     }
 
-    @Override
-    public List<BranchModelDto> findAllBranch() {
-        var sql = "SELECT sd.BRANCH_CODE as branchCode, sg.NAME as branchName, sg.ID as id FROM SYS_GROUP_FULL sg " +
-                "INNER JOIN SYS_GROUP_DETAIL sd on sd.GROUP_ID = sg.ID " +
-                "WHERE sg.PARENT_ID=(SELECT a.id from SYS_GROUP_FULL a where a.key ='233_BDH_ChiNhanh')\n";
-        Map<String, Object> params = new HashMap<>();
-        return sqlQueryUtil.queryModel().queryForList(sql, params, BranchModelDto.class);
-    }
+//    @Override
+//    public List<BranchModelDto> findAllBranch() {
+//        var sql = "SELECT sd.BRANCH_CODE as branchCode, sg.NAME as branchName, sg.ID as id FROM SYS_GROUP_FULL sg " +
+//                "INNER JOIN SYS_GROUP_DETAIL sd on sd.GROUP_ID = sg.ID " +
+//                "WHERE sg.PARENT_ID=(SELECT a.id from SYS_GROUP_FULL a where a.key ='233_BDH_ChiNhanh')\n";
+//        Map<String, Object> params = new HashMap<>();
+//        return sqlQueryUtil.queryModel().queryForList(sql, params, BranchModelDto.class);
+//    }
 
-    @Override
-    public List<SysUserModel> findUserDetail(Long id) {
-        var sql = "SELECT \n" +
-                "gf.Name as \"GROUP_NAME\",\n" +
-                "gf.PARENT_ID,\n" +
-                "gf.ID,\n" +
-                "r.Name  as \"ROLE_NAME\" \n" +
-                "FROM SYS_GROUP_USER gu\n" +
-                "JOIN SYS_GROUP_FULL gf on gf.ID = gu.GROUP_ID\n" +
-                "JOIN SYS_ROLE r on r.ID = gu.ROLE_ID\n" +
-                "WHERE gu.USER_ID =  :id ";
-        Map<String, Object> params = new HashMap<>();
-        params.put("id", id);
-        return sqlQueryUtil.queryModel().queryForList(sql, params, SysUserModel.class);
-    }
+//    @Override
+//    public List<SysUserModel> findUserDetail(Long id) {
+//        var sql = "SELECT \n" +
+//                "gf.Name as \"GROUP_NAME\",\n" +
+//                "gf.PARENT_ID,\n" +
+//                "gf.ID,\n" +
+//                "r.Name  as \"ROLE_NAME\" \n" +
+//                "FROM SYS_GROUP_USER gu\n" +
+//                "JOIN SYS_GROUP_FULL gf on gf.ID = gu.GROUP_ID\n" +
+//                "JOIN SYS_ROLE r on r.ID = gu.ROLE_ID\n" +
+//                "WHERE gu.USER_ID =  :id ";
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("id", id);
+//        return sqlQueryUtil.queryModel().queryForList(sql, params, SysUserModel.class);
+//    }
 }

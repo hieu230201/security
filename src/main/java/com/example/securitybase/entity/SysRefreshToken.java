@@ -12,9 +12,8 @@ public class SysRefreshToken {
     private Long expireat;
 
     @Id
-    @GeneratedValue(generator = "SYS_REFRESH_TOKEN_SEQ", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "SYS_REFRESH_TOKEN_SEQ", sequenceName = "SYS_REFRESH_TOKEN_SEQ",allocationSize=1)
-    @Column(name = "ID", unique = true, nullable = false)
+    @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
@@ -39,7 +38,7 @@ public class SysRefreshToken {
 
 
     @Basic
-    @Column(name = "TOKEN", length = 500)
+    @Column(name = "TOKEN")
     public String getToken() {
         return token;
     }

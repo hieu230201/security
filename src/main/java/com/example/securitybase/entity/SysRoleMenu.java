@@ -11,9 +11,8 @@ public class SysRoleMenu {
     private Long menuId;
 
     @Id
-    @GeneratedValue(generator = "SYS_ROLE_MENU_SEQ", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name = "SYS_ROLE_MENU_SEQ", sequenceName = "SYS_ROLE_MENU_SEQ",allocationSize=1)
     @Column(name = "ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long getId() {
         return id;
     }
