@@ -1,12 +1,12 @@
 package com.example.securitybase.repository.systems.impl;
 
+import com.example.securitybase.entity.SysGroupFull;
 import com.example.securitybase.entity.SysUser;
 import com.example.securitybase.repository.systems.SysGroupFullRepository;
 import com.example.securitybase.repository.systems.SysRoleRepository;
 import com.example.securitybase.repository.systems.SysUserRepositoryCustom;
 import com.example.securitybase.util.SqlQueryUtil;
 import com.example.securitybase.util.StringUtil;
-import com.mbbank.cmv.entity.CmvLsAttachmentConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
