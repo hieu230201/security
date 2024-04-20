@@ -1,6 +1,7 @@
 package com.example.securitybase.service.systems.impl;
 
 import com.example.securitybase.entity.SysRoleMenu;
+import com.example.securitybase.repository.systems.SysRoleMenuRepository;
 import com.example.securitybase.service.systems.AbstractGenericService;
 import com.example.securitybase.service.systems.SysRoleMenuService;
 import org.springframework.beans.factory.annotation.Autowired;

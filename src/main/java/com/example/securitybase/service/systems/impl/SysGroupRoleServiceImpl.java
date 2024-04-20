@@ -1,6 +1,7 @@
 package com.example.securitybase.service.systems.impl;
 
 import com.example.securitybase.entity.SysGroupRole;
+import com.example.securitybase.repository.systems.SysGroupRoleRepository;
 import com.example.securitybase.service.systems.AbstractGenericService;
 import com.example.securitybase.service.systems.SysGroupRoleService;
 import org.springframework.beans.factory.annotation.Autowired;

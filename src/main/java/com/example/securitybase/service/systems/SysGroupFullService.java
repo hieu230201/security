@@ -3,6 +3,7 @@ package com.example.securitybase.service.systems;
 
 import com.example.securitybase.entity.SysGroupFull;
 import com.example.securitybase.exception.CustomServiceBusinessException;
+import com.example.securitybase.model.SysUserModel;
 
 import java.util.List;
 
@@ -35,7 +36,7 @@ public interface SysGroupFullService extends GenericSevice<SysGroupFull, Long> {
 
     SysGroupFull findByKey(String key);
 
-    List<SysGroupFullAto> getFullGroupByUserId(Long userId, Boolean includePermission);
+//    List<SysGroupFullAto> getFullGroupByUserId(Long userId, Boolean includePermission);
 
     List<SysGroupFull> getByUserId(Long userId);
 

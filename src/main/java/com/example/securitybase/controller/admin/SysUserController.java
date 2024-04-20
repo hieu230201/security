@@ -2,24 +2,31 @@ package com.example.securitybase.controller.admin;
 
 import com.example.securitybase.comon.ErrorCode;
 import com.example.securitybase.comon.MbConstants;
+import com.example.securitybase.comon.enums.StatusType;
+import com.example.securitybase.comon.enums.SysUserRole;
+import com.example.securitybase.controller.bases.BaseController;
+import com.example.securitybase.entity.SysGroupUser;
 import com.example.securitybase.entity.SysUser;
+import com.example.securitybase.model.administrator.SysUserWithCaModel;
 import com.example.securitybase.response.ResponseData;
+import com.example.securitybase.service.systems.SysGroupUserService;
+import com.example.securitybase.service.systems.SysUserService;
+import com.example.securitybase.util.ModelMapperUtil;
 import com.example.securitybase.util.StringUtil;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/administrator/sysUser")

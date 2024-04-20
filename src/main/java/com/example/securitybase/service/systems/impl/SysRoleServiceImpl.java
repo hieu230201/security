@@ -1,10 +1,13 @@
 package com.example.securitybase.service.systems.impl;
 
 import com.example.securitybase.entity.SysRole;
+import com.example.securitybase.model.atos.clones.bases.SysPermissionAto;
+import com.example.securitybase.model.atos.clones.bases.SysRoleAto;
 import com.example.securitybase.repository.systems.SysPermissionRepository;
 import com.example.securitybase.repository.systems.SysRoleRepository;
 import com.example.securitybase.service.systems.AbstractGenericService;
 import com.example.securitybase.service.systems.SysRoleService;
+import com.example.securitybase.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -28,8 +31,6 @@ public class SysRoleServiceImpl extends AbstractGenericService<SysRole, Long> im
     }
 
     @Override
-    @UseSafeRunning
-    @UseLogging
     public List<SysRole> findByGroupId(Long groupId) {
         return repository.findByGroupId(groupId);
     }

@@ -1,6 +1,7 @@
 package com.example.securitybase.service.systems.impl;
 
 import com.example.securitybase.entity.SysRolePermission;
+import com.example.securitybase.repository.systems.SysRolePermissionRepository;
 import com.example.securitybase.service.systems.AbstractGenericService;
 import com.example.securitybase.service.systems.SysRolePermissionService;
 import org.springframework.beans.factory.annotation.Autowired;

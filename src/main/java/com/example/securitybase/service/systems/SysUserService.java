@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.example.securitybase.entity.SysUser;
 import com.example.securitybase.exception.CustomServiceBusinessException;
+import com.example.securitybase.model.administrator.SysUserWithCaModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -42,7 +43,7 @@ public interface SysUserService extends GenericSevice<SysUser, Long> {
 
 	List<SysUser> findByLikeUsername (String username) throws CustomServiceBusinessException;
 
-	String getRoleByUserName (String username) throws CustomServiceBusinessException;
+//	String getRoleByUserName (String username) throws CustomServiceBusinessException;
 
 	String getBranchByUser (String username, String key);
 }

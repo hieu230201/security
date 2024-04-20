@@ -1,11 +1,17 @@
 package com.example.securitybase.service.systems.impl;
 
+import com.example.securitybase.comon.ErrorCode;
+import com.example.securitybase.comon.enums.SysGroupType;
+import com.example.securitybase.entity.SysGroupDetail;
 import com.example.securitybase.entity.SysGroupFull;
 import com.example.securitybase.exception.CustomServiceBusinessException;
+import com.example.securitybase.model.SysUserModel;
+import com.example.securitybase.repository.systems.SysGroupDetailRepository;
 import com.example.securitybase.repository.systems.SysGroupFullRepository;
 import com.example.securitybase.repository.systems.SysPermissionRepository;
 import com.example.securitybase.repository.systems.SysRoleRepository;
 import com.example.securitybase.service.systems.*;
+import com.example.securitybase.util.ModelMapperUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
@@ -146,33 +152,33 @@ public class SysGroupFullServiceImpl extends AbstractGenericService<SysGroupFull
         return repository.findByKey(key);
     }
 
-    @UseSafeRunning
-    @UseLogging
-    public List<SysGroupFullAto> getFullGroupByUserId(Long userId, Boolean includePermission) {
-        List<SysGroupFullAto> sysGroupAtoes = new ArrayList<>();
-        var sysGroups = repository.findByUserId(userId);
-        for (var sysGroup : sysGroups)//noinspection DuplicatedCode,DuplicatedCode
-        {
-            var sysGroupAto = new SysGroupFullAto();
-            sysGroupAto = sysGroupAto.fromEntity(sysGroup);
-
-            List<SysRoleAto> sysRoleAtoes = ModelMapperUtil.listObjectToListModel(roleRepository.findByGroupIdAndUserId(sysGroupAto.getId(), userId), SysRoleAto.class);
-
-            if (includePermission != null && includePermission) {
-                for (SysRoleAto sysRoleAto : sysRoleAtoes) {
-                    List<SysPermissionAto> sysPermissionAtoes = ModelMapperUtil.listObjectToListModel(permissionRepository.findByGroupIdAndRoleId(sysGroupAto.getId(), sysRoleAto.getId()), SysPermissionAto.class);
-                    sysRoleAto.setSysPermissionAtoes(sysPermissionAtoes);
-                }
-            }
-
-
-            sysGroupAto.setSysRoleAtoes(sysRoleAtoes);
-
-            sysGroupAtoes.add(sysGroupAto);
-        }
-
-        return sysGroupAtoes;
-    }
+//    @UseSafeRunning
+//    @UseLogging
+//    public List<SysGroupFullAto> getFullGroupByUserId(Long userId, Boolean includePermission) {
+//        List<SysGroupFullAto> sysGroupAtoes = new ArrayList<>();
+//        var sysGroups = repository.findByUserId(userId);
+//        for (var sysGroup : sysGroups)//noinspection DuplicatedCode,DuplicatedCode
+//        {
+//            var sysGroupAto = new SysGroupFullAto();
+//            sysGroupAto = sysGroupAto.fromEntity(sysGroup);
+//
+//            List<SysRoleAto> sysRoleAtoes = ModelMapperUtil.listObjectToListModel(roleRepository.findByGroupIdAndUserId(sysGroupAto.getId(), userId), SysRoleAto.class);
+//
+//            if (includePermission != null && includePermission) {
+//                for (SysRoleAto sysRoleAto : sysRoleAtoes) {
+//                    List<SysPermissionAto> sysPermissionAtoes = ModelMapperUtil.listObjectToListModel(permissionRepository.findByGroupIdAndRoleId(sysGroupAto.getId(), sysRoleAto.getId()), SysPermissionAto.class);
+//                    sysRoleAto.setSysPermissionAtoes(sysPermissionAtoes);
+//                }
+//            }
+//
+//
+//            sysGroupAto.setSysRoleAtoes(sysRoleAtoes);
+//
+//            sysGroupAtoes.add(sysGroupAto);
+//        }
+//
+//        return sysGroupAtoes;
+//    }
 
     @Override
     public List<SysGroupFull> getByUserId(Long userId) {
@@ -209,12 +215,12 @@ public class SysGroupFullServiceImpl extends AbstractGenericService<SysGroupFull
     public boolean moveDepartment(Long groupId) throws CustomServiceBusinessException {
         var sysGroupFull = repository.findById(groupId).orElse(null);
         if (Objects.isNull(sysGroupFull)) {
-            throw new CustomServiceBusinessException(ErrorCode.NOT_FOUND_GROUP);
+            throw new CustomServiceBusinessException(ErrorCode.CALL_API_HTTP_ERROR);
         }
 
         var objChiNhanhAll = repository.findByKey("233_BDH_ChiNhanh");
         if (Objects.isNull(objChiNhanhAll)) {
-            throw new CustomServiceBusinessException(ErrorCode.NOT_FOUND_GROUP_PARENT_CN);
+            throw new CustomServiceBusinessException(ErrorCode.IT02_ERROR);
         }
 
         //cập nhật parent

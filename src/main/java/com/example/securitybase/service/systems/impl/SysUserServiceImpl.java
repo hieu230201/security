@@ -7,10 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.example.securitybase.comon.enums.SysGroupType;
+import com.example.securitybase.comon.enums.SysRoleKey;
+import com.example.securitybase.comon.enums.SysUserRole;
 import com.example.securitybase.entity.SysRole;
 import com.example.securitybase.entity.SysUser;
+import com.example.securitybase.exception.CustomServiceBusinessException;
+import com.example.securitybase.model.SysUserModel;
+import com.example.securitybase.model.administrator.SysUserWithCaModel;
+import com.example.securitybase.model.atos.clones.bases.SysUserCaAto;
+import com.example.securitybase.repository.systems.SysGroupUserRepository;
 import com.example.securitybase.repository.systems.SysUserRepository;
 import com.example.securitybase.service.systems.*;
+import com.example.securitybase.util.ModelMapperUtil;
 import com.example.securitybase.util.StringUtil;
 import io.jsonwebtoken.lang.Collections;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,12 +49,6 @@ public class SysUserServiceImpl extends AbstractGenericService<SysUser, Long>
 
     @Autowired
     SysGroupUserRepository sysGroupUserRepository;
-
-    @Autowired
-    private GetUserHcmService getUserHcmService;
-
-    @Autowired
-    private CmvMappingRoleHcmRepository cmvMappingRoleHcmRepository;
 
     @Override
     protected JpaRepository<SysUser, Long> getRepository() {
@@ -129,8 +132,6 @@ public class SysUserServiceImpl extends AbstractGenericService<SysUser, Long>
     }
 
     @Override
-    @UseLogging
-    @UseSafeRunning
     public SysUser findByUserId(Long userId) {
         SysUser user = repository.findById(userId).orElse(null);
         return user;
@@ -274,32 +275,32 @@ public class SysUserServiceImpl extends AbstractGenericService<SysUser, Long>
     }
 
     @Override
-    public List<SysUser> findByLikeUsername(String username) throws CmvBusinessException {
+    public List<SysUser> findByLikeUsername(String username) throws CustomServiceBusinessException {
         List<SysUser> list = repository.findByUsernameLike("%" + username + "%");
         if (list == null || list.isEmpty()) {
             list = new ArrayList<>();
-            UserHcmResponse userHcmResponse = getUserHcmService.getCustomerHcm(username);
-            if (userHcmResponse != null && userHcmResponse.getData() != null) {
-                list = new ArrayList<>();
-                SysUser sysUser = new SysUser();
-                sysUser.setUsername(userHcmResponse.getData().getUserId());
-                sysUser.setFullname(userHcmResponse.getData().getFullName());
-                sysUser.setStatus("NORMAL");
-                repository.save(sysUser);
-                list.add(sysUser);
-            }
+//            UserHcmResponse userHcmResponse = getUserHcmService.getCustomerHcm(username);
+//            if (userHcmResponse != null && userHcmResponse.getData() != null) {
+//                list = new ArrayList<>();
+//                SysUser sysUser = new SysUser();
+//                sysUser.setUsername(userHcmResponse.getData().getUserId());
+//                sysUser.setFullname(userHcmResponse.getData().getFullName());
+//                sysUser.setStatus("NORMAL");
+//                repository.save(sysUser);
+//                list.add(sysUser);
+//            }
         }
         return list != null ? list.stream().filter(x -> x.getFullname() != null).collect(Collectors.toList()) : null;
     }
 
-    @Override
-    public String getRoleByUserName(String username) throws CmvBusinessException {
-        UserHcmResponse userHcmResponse = getUserHcmService.getCustomerHcm(username);
-        if (userHcmResponse != null && userHcmResponse.getData() != null) {
-            return userHcmResponse.getData().getJobName();
-        }
-        return null;
-    }
+//    @Override
+//    public String getRoleByUserName(String username) throws CustomServiceBusinessException {
+//        UserHcmResponse userHcmResponse = getUserHcmService.getCustomerHcm(username);
+//        if (userHcmResponse != null && userHcmResponse.getData() != null) {
+//            return userHcmResponse.getData().getJobName();
+//        }
+//        return null;
+//    }
 
     @Override
     public String getBranchByUser(String username, String key) {
@@ -314,12 +315,12 @@ public class SysUserServiceImpl extends AbstractGenericService<SysUser, Long>
     public List<SysUser> getListUserPheDuyet(Long userId, String donViDinhGiaId) {
         List<String> roleStaffKeys = new ArrayList<>();
         List<SysUser> listUser = new ArrayList<>();
-        if (donViDinhGiaId.equals(DonViKhoiTao.MB.getValue())) {
+        if (donViDinhGiaId.equals("MB")) {
             roleStaffKeys.add(SysUserRole.MB_CHUYEN_VIEN_QLTSDB.getValue());
             roleStaffKeys.add(SysUserRole.MB_ADMIN_QLTSDB.getValue());
             listUser = repository.getListUserApprovedByListRoleAndUserCV(userId,
                     roleStaffKeys, SysUserRole.MB_KIEM_SOAT_QLTSDB.getValue());
-        } else if (donViDinhGiaId.equals(DonViKhoiTao.MBAMC.getValue())) {
+        } else if (donViDinhGiaId.equals("AMC")) {
             roleStaffKeys.add(SysUserRole.AMC_CVDG.getValue());
             listUser = repository.getListUserApprovedByListRoleAndUserCV(userId,
                     roleStaffKeys, SysUserRole.AMC_GDPD.getValue());

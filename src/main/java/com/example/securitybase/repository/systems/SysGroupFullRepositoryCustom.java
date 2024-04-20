@@ -1,6 +1,7 @@
 package com.example.securitybase.repository.systems;
 
 import com.example.securitybase.entity.SysGroupFull;
+import com.example.securitybase.model.SysUserModel;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,6 +31,6 @@ public interface SysGroupFullRepositoryCustom {
 
 //    List<BranchModelDto> findAllBranch();
 //
-//    List<SysUserModel> findUserDetail(Long id);
+    List<SysUserModel> findUserDetail(Long id);
 
 }

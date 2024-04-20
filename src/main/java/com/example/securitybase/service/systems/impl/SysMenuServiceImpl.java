@@ -1,6 +1,7 @@
 package com.example.securitybase.service.systems.impl;
 
 import com.example.securitybase.entity.SysMenu;
+import com.example.securitybase.repository.systems.SysGroupMenuRepository;
 import com.example.securitybase.repository.systems.SysMenuRepository;
 import com.example.securitybase.service.systems.AbstractGenericService;
 import com.example.securitybase.service.systems.SysMenuService;

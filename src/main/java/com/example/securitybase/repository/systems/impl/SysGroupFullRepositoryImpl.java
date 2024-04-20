@@ -1,6 +1,7 @@
 package com.example.securitybase.repository.systems.impl;
 
 import com.example.securitybase.entity.SysGroupFull;
+import com.example.securitybase.model.SysUserModel;
 import com.example.securitybase.repository.systems.SysGroupFullRepositoryCustom;
 import com.example.securitybase.util.SqlQueryUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -232,19 +233,19 @@ public class SysGroupFullRepositoryImpl implements SysGroupFullRepositoryCustom 
 //        return sqlQueryUtil.queryModel().queryForList(sql, params, BranchModelDto.class);
 //    }
 
-//    @Override
-//    public List<SysUserModel> findUserDetail(Long id) {
-//        var sql = "SELECT \n" +
-//                "gf.Name as \"GROUP_NAME\",\n" +
-//                "gf.PARENT_ID,\n" +
-//                "gf.ID,\n" +
-//                "r.Name  as \"ROLE_NAME\" \n" +
-//                "FROM SYS_GROUP_USER gu\n" +
-//                "JOIN SYS_GROUP_FULL gf on gf.ID = gu.GROUP_ID\n" +
-//                "JOIN SYS_ROLE r on r.ID = gu.ROLE_ID\n" +
-//                "WHERE gu.USER_ID =  :id ";
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("id", id);
-//        return sqlQueryUtil.queryModel().queryForList(sql, params, SysUserModel.class);
-//    }
+    @Override
+    public List<SysUserModel> findUserDetail(Long id) {
+        var sql = "SELECT \n" +
+                "gf.Name as \"GROUP_NAME\",\n" +
+                "gf.PARENT_ID,\n" +
+                "gf.ID,\n" +
+                "r.Name  as \"ROLE_NAME\" \n" +
+                "FROM SYS_GROUP_USER gu\n" +
+                "JOIN SYS_GROUP_FULL gf on gf.ID = gu.GROUP_ID\n" +
+                "JOIN SYS_ROLE r on r.ID = gu.ROLE_ID\n" +
+                "WHERE gu.USER_ID =  :id ";
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        return sqlQueryUtil.queryModel().queryForList(sql, params, SysUserModel.class);
+    }
 }

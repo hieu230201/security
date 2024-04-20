@@ -3,6 +3,7 @@ package com.example.securitybase.service.systems.impl;
 import java.util.List;
 
 import com.example.securitybase.entity.SysUserCa;
+import com.example.securitybase.model.atos.clones.bases.SysUserCaAto;
 import com.example.securitybase.repository.systems.SysUserCaRepository;
 import com.example.securitybase.service.systems.AbstractGenericService;
 import com.example.securitybase.service.systems.SysUserCaService;
