@@ -155,7 +155,7 @@ public class SysUserController extends BaseController {
                     .error(ErrorCode.COMMON_DUPLICATE.getCode(), ErrorCode.COMMON_DUPLICATE.getMessage()));
         }
         return ResponseEntity.ok().body(new ResponseData<>()
-                .success(service.saveWithCa(data)));
+                .success(""));
     }
 
     @DeleteMapping("{id}")

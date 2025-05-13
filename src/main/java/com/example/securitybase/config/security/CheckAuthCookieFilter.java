@@ -45,27 +45,6 @@ public class CheckAuthCookieFilter extends OncePerRequestFilter {
         String uuid = UUID.randomUUID().toString();
 
         if ((contextPath + "actuator/prometheus").equals(request.getRequestURI())
-                || (contextPath + "actuator/health").equals(request.getRequestURI())
-                || (contextPath + "common/file/upload").equals(request.getRequestURI())
-                || (contextPath + "common/file/upload-kho").equals(request.getRequestURI())
-                || (contextPath + "common/file/upload-phan-khu").equals(request.getRequestURI())
-                || (contextPath + "common/file/upload-nhom-ctxd").equals(request.getRequestURI())
-                || (contextPath + "common/file/uploadEcm").equals(request.getRequestURI())
-                || (contextPath + "common/file/import").equals(request.getRequestURI())
-                || (contextPath + "huongdan/save").equals(request.getRequestURI())
-                || (contextPath + "CmvCsKctBdsQsdd/saveData").equals(request.getRequestURI())
-                || (contextPath + "CmvCsKctBdsQsdd/saveAndContinue").equals(request.getRequestURI())
-                || (contextPath + "CmvCsKctBdsQsdd/import").equals(request.getRequestURI())
-                || (contextPath + "CmvCsImportInfo/import").equals(request.getRequestURI())
-                || (contextPath + "CmvCsImportInfo/import-kho").equals(request.getRequestURI())
-                || (contextPath + "CmvCsImportInfo/import-phan-khu").equals(request.getRequestURI())
-                || (contextPath + "CmvCsImportInfo/import-nhom-ctxd").equals(request.getRequestURI())
-                || (contextPath + "test/upload").equals(request.getRequestURI())
-                || (contextPath + "CmvCsImportInfo/upload-config").equals(request.getRequestURI())
-                || (contextPath + "administrator/sysUser/with-ca").equals(request.getRequestURI())
-                || (contextPath + "administrator/sysUser/saveKiemKe").equals(request.getRequestURI())
-                || (contextPath + "CmvCsImportInfo/importNotApprove").equals(request.getRequestURI())
-                || (contextPath + "CmvCsImportInfo/importLoaiCtxd").equals(request.getRequestURI())
         ) {
             ThreadContext.put(MbConstants.UU_ID, uuid);
             ThreadContext.put(MbConstants.START_TIME, String.valueOf(start));
